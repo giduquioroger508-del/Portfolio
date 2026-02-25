@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Roger Giduquio · Multimedia Starter</title>
+    <style>
+        /* ---------- MINIMAL BLACK & WHITE · MULTIMEDIA FOCUS ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;  /* solid black base */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            padding: 1rem;
+            position: relative;
+        }
+
+        /* subtle grain / texture (barely visible, for depth) */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.12"><rect width="100" height="100" fill="none"/><path d="M10 10 L90 10 M10 30 L90 30 M10 50 L90 50 M10 70 L90 70 M10 90 L90 90 M10 10 L10 90 M30 10 L30 90 M50 10 L50 90 M70 10 L70 90 M90 10 L90 90" stroke="%23ffffff" stroke-width="0.9" fill="none"/></svg>');
+            background-size: 180px 180px;
+            pointer-events: none;
+        }
+
+        /* main card – clean white, sharp black borders, no yellow/gold */
+        .landing {
+            max-width: 1300px;
+            width: 100%;
+            background: #ffffff;          /* crisp white base */
+            box-shadow: 0 30px 50px -20px rgba(0,0,0,1), 0 10px 20px -5px rgba(0,0,0,0.9);
+            border-radius: 38px;
+            padding: 2.2rem 2rem;
+            transition: 0.2s;
+            position: relative;
+            border: 1px solid #000000;    /* pure black border */
+        }
+
+        /* black accent line – now purely black */
+        .landing::after {
+            content: "";
+            position: absolute;
+            bottom: 20px;
+            right: 32px;
+            width: 130px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #666666, #000000);
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+
+        /* ---------- PORTFOLIO GRID – B&W MULTIMEDIA ---------- */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+            opacity: 1;
+            transition: none;
+        }
+
+        /* card style: no yellow, only black, white, grey */
+        .card {
+            background: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 32px;
+            box-shadow: 0 18px 30px -12px rgba(0,0,0,0.8), 0 6px 12px -6px #000000;
+            padding: 1.8rem 1.5rem;
+            color: #1e1e1e;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            transition: 0.2s;
+            word-wrap: break-word;
+            animation: cardFadeUp 0.5s forwards;
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        .resume-grid .card:nth-child(1) { animation-delay: 0.05s; }
+        .resume-grid .card:nth-child(2) { animation-delay: 0.1s; }
+        .resume-grid .card:nth-child(3) { animation-delay: 0.15s; }
+        .resume-grid .card:nth-child(4) { animation-delay: 0.2s; }
+        .resume-grid .card:nth-child(5) { animation-delay: 0.25s; }
+        .resume-grid .card:nth-child(6) { animation-delay: 0.3s; }
+        .resume-grid .card:nth-child(7) { animation-delay: 0.35s; }
+        .resume-grid .card:nth-child(8) { animation-delay: 0.4s; }
+
+        @keyframes cardFadeUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .card:hover {
+            border-color: #000000;
+            box-shadow: 0 22px 35px -12px #000000, 0 0 0 2px #333333 inset;
+            background: #fcfcfc;
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            font-weight: 650;
+            color: #000000;
+            border-bottom: 3px solid #000000;     /* pure black underline */
+            padding-bottom: 12px;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .card h2::before {
+            content: "▌";
+            color: #000000;
+            font-weight: 600;
+            font-size: 2rem;
+        }
+
+        /* avatar – greyscale / black & white style */
+        .avatar-img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #cccccc, #ffffff);
+            border: 4px solid #000000;
+            box-shadow: 0 12px 25px -8px #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            filter: grayscale(100%); /* force black/white */
+        }
+
+        .avatar-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 18px 30px -5px #000000, 0 0 0 4px #333333;
+            border-color: #333333;
+        }
+
+        .detail-item {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #ffffff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            border: 1.5px solid #000000;   /* black */
+            box-shadow: 0 6px 10px -6px #000000;
+            word-break: break-word;
+            flex-wrap: wrap;
+            color: #121212;
+            font-weight: 450;
+        }
+
+        /* Skill chips – now purely black & white, with grey variants */
+        .skill-chip {
+            background: #ffffff;
+            border: 2px solid #000000;
+            color: #000000;
+            padding: 0.7rem 1.8rem;
+            font-size: 1.1rem;
+            margin: 0.3rem;
+            display: inline-block;
+            border-radius: 40px;
+            box-shadow: 0 5px 0 #000000;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            transition: 0.1s;
+        }
+
+        .skill-chip.other {
+            border-color: #333333;
+            background: #f2f2f2;
+            color: #1e1e1e;
+            box-shadow: 0 5px 0 #333333;
+        }
+
+        .skill-chip:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #000000;
+        }
+
+        /* grid spans */
+        @media (min-width: 600px) {
+            .resume-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .span-2 {
+                grid-column: span 2;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .resume-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* scrollbar greyscale */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #f0f0f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#333333, #000000);
+            border-radius: 20px;
+        }
+
+        @media (max-width: 450px) {
+            .landing {
+                padding: 1.5rem 1rem;
+            }
+            .card h2 {
+                font-size: 1.8rem;
+            }
+            .avatar-img {
+                width: 140px; height: 140px;
+            }
+        }
+
+        /* no leftover elements */
+        .hero, #welcomeBlock, .view-now, .loader {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="landing">
+    <div id="resumeGrid" class="resume-grid">
+        <!-- CARD 1: profile avatar (multimedia starter) – using placeholder grey circle, but we use an initial for roger -->
+        <div class="card" style="display: flex; justify-content: center; align-items: center;">
+            <div class="avatar-img">
+              <img src="pic.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- CARD 2: name & title (span-2) multimedia starter emphasis -->
+        <div class="card span-2">
+            <h2>ROGER GIDUQUIO</h2>
+            <div style="font-size: 2rem; font-weight: 600; background: #000000; color: #ffffff; display: inline-block; padding: 0.4rem 1.8rem; border-radius: 60px; letter-spacing: 0.5px;">🎬 MULTIMEDIA STARTER</div>
+            <div style="font-size: 1.4rem; color: #2d2d2d; margin-top: 0.8rem; display: flex; gap: 1.2rem; flex-wrap: wrap;">
+                <span>🎓 3rd year · Digital Media</span>
+                <span>⚙️ video · audio · design</span>
+            </div>
+        </div>
+
+        <!-- CARD 3: contact & details – updated to roger@gmail.com -->
+        <div class="card">
+            <h2>📬 CONTACT</h2>
+            <div class="detail-item">✉ roger@gmail.com</div>
+            <div class="detail-item">📍 Cebu City, PH</div>
+        </div>
+
+        <!-- CARD 4: education (multimedia focus) -->
+        <div class="card">
+            <h2>🎓 EDUCATION</h2>
+            <div class="detail-item" style="flex-direction: column; align-items: start; gap:6px;">
+                <span style="font-size:1.3rem; color:#000;">BS Information technology</span>
+                <span>Madridejos Community College</span>
+            </div>
+            <div class="detail-item" style="margin-top: 0.6rem;">
+                <span>➕ motion graphics / sound design</span>
+            </div>
+        </div>
+
+        <!-- CARD 5: multimedia skills – B&W chips -->
+        <div class="card span-2">
+            <h2>🛠️ MULTIMEDIA SKILLS</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="skill-chip">After Effects</span>
+                <span class="skill-chip">Photoshop · Lightroom</span>
+                <span class="skill-chip other">Audacity · FL Studio</span>
+              
+            </div>
+            <div style="margin-top: 1.2rem; font-size: 1.15rem; color:#232323;">➕ DSLR · lighting · storyboarding · colour grading</div>
+        </div>
+
+     
+        <!-- CARD 7: PROFESSIONAL OBJECTIVE – pure multimedia starter, no filler -->
+        <div class="card span-2">
+            <h2>🎯 MULTIMEDIA OBJECTIVE</h2>
+            <div style="background: #f2f2f2; padding: 1.8rem; border-left: 8px solid #000000; border-radius: 28px; font-size: 1.3rem; line-height: 1.5; color: #101010; box-shadow: inset 0 2px 10px #aaaaaa40;">
+                Creative and motivated <strong>multimedia starter</strong> with hands‑on experience in video editing, basic motion graphics, and audio production. Passionate about visual storytelling and digital content creation. Seeking an entry‑level role to apply editing, filming, and design skills while growing within a dynamic creative team. Quick learner, detail‑oriented, and ready to contribute to multimedia projects.
+            </div>
+        </div>
+
+        <!-- optional extra card to reflect multimedia tools (CARD 8) – purely black and white -->
+       
+
+    </div>   <!-- close resume-grid -->
+</div>      <!-- close landing -->
+
+</body>
+</html>
